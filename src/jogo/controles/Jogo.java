@@ -10,8 +10,8 @@ public class Jogo {
     private final Tabuleiro tabuleiro;
     private final Cobra cobra;
     private final Comida comida;
-    private boolean gameOver;
-    private int score;
+    private boolean jogoEstaTerminado;
+    private int pontuacao;
 
     public Jogo(int largura, int altura) {
         this.tabuleiro = new Tabuleiro(largura, altura);
@@ -22,26 +22,26 @@ public class Jogo {
         this.comida = new Comida(largura, altura);
         this.gerarNovaComida();
 
-        this.gameOver = false;
-        this.score = 0;
+        this.jogoEstaTerminado = false;
+        this.pontuacao = 0;
 
         atualizarEstadoTabuleiro();
     }
 
     public void atualizar() {
-        if (gameOver) {
+        if (jogoEstaTerminado) {
             return;
         }
 
         cobra.mover();
 
         if (verificarColisoes()) {
-            gameOver = true;
+            jogoEstaTerminado = true;
             return;
         }
 
         if (verificarComida()) {
-            score += 10;
+            pontuacao += 10;
             cobra.crescer();
             gerarNovaComida();
         }
@@ -85,7 +85,7 @@ public class Jogo {
         } while (cobra.getCorpo().contains(comida.getPosicao()));
     }
 
-    public void setDirecaoCobra(Cobra.Direcao novaDirecao) {
+    public void mudarDirecaoDaCobra(Cobra.Direcao novaDirecao) {
         cobra.mudarDirecao(novaDirecao);
     }
 
@@ -101,11 +101,11 @@ public class Jogo {
         return comida;
     }
 
-    public boolean isGameOver() {
-        return gameOver;
+    public boolean isJogoEstaTerminado() {
+        return jogoEstaTerminado;
     }
 
-    public int getScore() {
-        return score;
+    public int getPontuacao() {
+        return pontuacao;
     }
 }
