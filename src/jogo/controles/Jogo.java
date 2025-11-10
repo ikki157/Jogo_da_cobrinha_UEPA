@@ -24,6 +24,8 @@ public class Jogo {
 
         this.gameOver = false;
         this.score = 0;
+
+        atualizarEstadoTabuleiro();
     }
 
     public void atualizar() {
@@ -43,6 +45,20 @@ public class Jogo {
             cobra.crescer();
             gerarNovaComida();
         }
+
+        atualizarEstadoTabuleiro();
+    }
+
+    private void atualizarEstadoTabuleiro() {
+        tabuleiro.limparCelulas();
+
+        tabuleiro.setTipoNa(comida.getPosicao(), Tabuleiro.TipoCelula.COMIDA);
+
+        for (Posicao p : cobra.getCorpo()) {
+            tabuleiro.setTipoNa(p, Tabuleiro.TipoCelula.CORPO_COBRA);
+        }
+
+        tabuleiro.setTipoNa(cobra.getCabeca(), Tabuleiro.TipoCelula.CABECA_COBRA);
     }
 
     private boolean verificarColisoes() {
