@@ -16,7 +16,7 @@ public class Jogo {
     public Jogo(int largura, int altura) {
         this.tabuleiro = new Tabuleiro(largura, altura);
 
-        Posicao posInicial = new Posicao(largura / 2, altura / 2);
+        Posicao posInicial = new Posicao(largura / 3, altura / 2);
         this.cobra = new Cobra(posInicial, Cobra.Direcao.DIREITA);
 
         this.comida = new Comida(largura, altura);
